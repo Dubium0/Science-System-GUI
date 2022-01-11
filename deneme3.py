@@ -66,6 +66,18 @@ class Ui_MainWindow(object):
         """
         ----------------
         """
+        
+        self.comboBox.addItems(["All Sensors",data_func_list[0][1],data_func_list[1][1],data_func_list[2][1],data_func_list[3][1]])
+        self.comboBox.currentIndexChanged.connect(self.selectionChange)
+        
+        """
+        ----------------
+        """
+        
+        
+        """
+        ----------------
+        """
         self.lyt = QtWidgets.QGridLayout()
         self.frame.setLayout(self.lyt)
         
@@ -135,6 +147,46 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+    def selectionChange(self,index):
+        
+        if index ==0:
+            self.ClearLayout(self.lyt)
+            self.myFig1 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 0)
+            self.lyt.addWidget(self.myFig1,1,1)
+            
+            self.myFig2 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1, index = 1)
+            self.lyt.addWidget(self.myFig2,1,2)
+            
+            
+            
+            self.myFig3 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 2)
+            self.lyt.addWidget(self.myFig3,2,1)
+            
+            self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 3)
+            self.lyt.addWidget(self.myFig4,2,2)
+        
+            
+        elif index ==1:
+            self.ClearLayout(self.lyt)
+            self.myFig2 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1, index = 0)
+            self.lyt.addWidget(self.myFig2)
+            
+            
+        elif index ==2:
+            self.ClearLayout(self.lyt)
+            self.myFig3 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 1)
+            self.lyt.addWidget(self.myFig3)
+            
+        elif index ==3:
+            self.ClearLayout(self.lyt)
+            self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 2)
+            self.lyt.addWidget(self.myFig4)
+        elif index ==4:
+            self.ClearLayout(self.lyt)
+            self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 3)
+            self.lyt.addWidget(self.myFig4)
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -150,6 +202,9 @@ class Ui_MainWindow(object):
         self.pushButton_4.setText(_translate("MainWindow", "Tube 4"))
         self.pushButton_2.setText(_translate("MainWindow", "Tube 2"))
         self.label.setText(_translate("MainWindow", "Tube Control"))
+    def ClearLayout(self,layout):
+        for i in reversed(range(layout.count())): 
+            layout.itemAt(i).widget().setParent(None)
 
 
 class MyFigureCanvas(FigureCanvas):
