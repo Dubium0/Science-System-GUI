@@ -21,6 +21,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+#import xlsxwriter
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -280,35 +281,32 @@ class MyFigureCanvas(FigureCanvas):
 # Data source
 # ------------
 
-data = {"temperature":[],"pressure":[],"altitude":[],"otherdata":[]}
-
-
 def temperature():
-    global data
-    k = random.randint(20,25) 
-    data["temperature"].append(k)
-    
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = int(data_listesi[0])
     return k
 
 def pressure():
-    global data
-    k = random.randint(20,25) 
-    data["pressure"].append(k)
-    
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = int(data_listesi[1])
     return k
 
 def altitude():
-    global data
-    k = random.randint(20,25) 
-    data["altitude"].append(k)
-    
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = int(data_listesi[2])
     return k
 
 def otherdata():
-    global data
-    k = random.randint(20,25) 
-    data["otherdata"].append(k)
-    
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = int(data_listesi[3])
     return k
 data_func_list = [(temperature,"temperature"),(pressure,"pressure"),(altitude,"altitude"),(otherdata,"otherdata")]
 """    
