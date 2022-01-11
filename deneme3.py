@@ -24,8 +24,14 @@ import random
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("OZU Rover SSC")
+        MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 601)
+        #---
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("logo.png"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        MainWindow.setWindowIcon(icon)
+        #---
+        #self.setWindowIcon(QtGui.QIcon('logo.png'))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.centralwidget)
@@ -189,14 +195,14 @@ class Ui_MainWindow(object):
         
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "OZU Rover SSC"))
         self.label_2.setText(_translate("MainWindow", "Shovel Control"))
         self.pushButton_6.setText(_translate("MainWindow", "Shovel Take"))
         self.pushButton_5.setText(_translate("MainWindow", "Shovel Up"))
         self.pushButton_7.setText(_translate("MainWindow", "Shovel Down"))
         self.pushButton_8.setText(_translate("MainWindow", "Shovel Put"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Tab 1"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Tab 2"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Graphics"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Others"))
         self.pushButton_3.setText(_translate("MainWindow", "Tube 3"))
         self.pushButton.setText(_translate("MainWindow", "Tube 1"))
         self.pushButton_4.setText(_translate("MainWindow", "Tube 4"))
@@ -322,6 +328,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
