@@ -1,7 +1,7 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jan 11 17:09:14 2022
-
 @author: LENOPC
 """
 
@@ -18,50 +18,24 @@ import pandas as pd
 import xlsxwriter
 import matplotlib.pyplot as plt
 import os 
-#import rospy 
-#from std_msgs.msg import String
+import rospy 
+from std_msgs.msg import String
 
 """
 'Random sensor values' part not necessery for ros implementation. We will get sensor values from publisher.
  
 """
 
-# random sensor values
-def temperature():
-    x = random.randint(20,30)
-    return x
-
-
-def pressure():
-    x = random.randint(20,30)
-    return x 
-    
-    
-def altitude():
-    x = random.randint(20,30)
-    return x 
-
-def radiation():
-    x = random.randint(20,30)
-    return x 
-
-"""
-def moisture():
-    x = random.randint(220,240)
-    return x
-
-"""
-# convert and append to dict
-
 def callback(sensor_datas):
-    data_list =sensor_datas.split(",") # we will write data.data instead of sensor_datas
+    data_list =sensor_datas.data.split(",") # we will write data.data instead of sensor_datas
     f = open("data.txt","a")
-    f.write(f"{sensor_datas}\n")
+    f.write(f"{sensor_datas.data}\n")
     f.close()
     k = 0
     for i in dictionary:
         dictionary[i].append(float(data_list[k]))
         k+=1
+    #create_excel_file(dictionary)
         
 
     
@@ -139,29 +113,17 @@ def create_excel_file(dictionary):
 
 
 
-dictionary =  {"temperature":[],"pressure":[],"altitude":[],"radiation":[]}
+dictionary =  {"temperature":[],"pressure":[],"altitude":[],"karbon":[]}
 
 
 #def makeIt(_input):
-x= 0
-while x<1000: # if __name__=="__main__":
-    x+=1
-    
-    #rospy.init_node("excel_writer")
-    #rospy.Subscriber("SENSORS",String,callback) # we will call callback here
-    sensor_datas = "{},{},{},{}".format(temperature(),pressure(),altitude(),radiation()) # it will be data.data for ros sub
-    
-    callback(sensor_datas)# we will directly write data.data for ros implementation
-
-    #plt.show()
-    create_excel_file(dictionary)
-    #rospy.spin()
-    
     
         
         
         #time.sleep(0.5)
-"""       
+      
 if __name__=="__main__":
-    makeIt()
-"""   
+    rospy.init_node("dataIN")
+    rospy.Subscriber("SENSORS",String,callback)
+
+    rospy.spin()
