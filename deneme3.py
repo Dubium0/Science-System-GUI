@@ -88,18 +88,18 @@ class Ui_MainWindow(object):
         self.lyt = QtWidgets.QGridLayout()
         self.frame.setLayout(self.lyt)
         
-        self.myFig1 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 0)
+        self.myFig1 = MyFigureCanvas(100,data_list["temperature"] , interval=1,index = 0)
         self.lyt.addWidget(self.myFig1,1,1)
         
-        self.myFig2 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1, index = 1)
+        self.myFig2 = MyFigureCanvas(100,data_list["pressure"] , interval=1, index = 1)
         self.lyt.addWidget(self.myFig2,1,2)
         
         
         
-        self.myFig3 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 2)
+        self.myFig3 = MyFigureCanvas(100,data_list["altitude"] , interval=1,index = 2)
         self.lyt.addWidget(self.myFig3,2,1)
         
-        self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 3)
+        self.myFig4 = MyFigureCanvas(100,data_list["otherdata"], interval=1,index = 3)
         self.lyt.addWidget(self.myFig4,2,2)
         
         
@@ -159,39 +159,39 @@ class Ui_MainWindow(object):
         
         if index ==0:
             self.ClearLayout(self.lyt)
-            self.myFig1 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 0)
+            self.myFig1 = MyFigureCanvas(100,data_list["temperature"] ,interval=1,index = 0)
             self.lyt.addWidget(self.myFig1,1,1)
             
-            self.myFig2 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1, index = 1)
+            self.myFig2 = MyFigureCanvas(100, data_list["pressure"] , interval=1, index = 1)
             self.lyt.addWidget(self.myFig2,1,2)
             
             
             
-            self.myFig3 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 2)
+            self.myFig3 = MyFigureCanvas(100, data_list["altitude"] , interval=1,index = 2)
             self.lyt.addWidget(self.myFig3,2,1)
             
-            self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 3)
+            self.myFig4 = MyFigureCanvas(100, data_list["otherdata"] , interval=1,index = 3)
             self.lyt.addWidget(self.myFig4,2,2)
         
             
         elif index ==1:
             self.ClearLayout(self.lyt)
-            self.myFig2 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1, index = 0)
+            self.myFig2 = MyFigureCanvas(100, data_list["temperature"] , interval=1, index = 0)
             self.lyt.addWidget(self.myFig2)
             
             
         elif index ==2:
             self.ClearLayout(self.lyt)
-            self.myFig3 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 1)
+            self.myFig3 = MyFigureCanvas(100, data_list["pressure"] , interval=1,index = 1)
             self.lyt.addWidget(self.myFig3)
             
         elif index ==3:
             self.ClearLayout(self.lyt)
-            self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 2)
+            self.myFig4 = MyFigureCanvas(100, data_list["altitude"] , interval=1,index = 2)
             self.lyt.addWidget(self.myFig4)
         elif index ==4:
             self.ClearLayout(self.lyt)
-            self.myFig4 = MyFigureCanvas(x_len=100, y_range=[0,50], interval=1,index = 3)
+            self.myFig4 = MyFigureCanvas(100, data_list["otherdata"] , interval=1,index = 3)
             self.lyt.addWidget(self.myFig4)
         
     def retranslateUi(self, MainWindow):
@@ -219,34 +219,41 @@ class MyFigureCanvas(FigureCanvas):
     This is the FigureCanvas in which the live plot is drawn.
 
     '''
-    def __init__(self, x_len:int, y_range:List, interval:int , index:int) -> None:
+    def __init__(self, x_len, data_list ,interval , index):
         '''
         :param x_len:       The nr of data points shown in one plot.
         :param y_range:     Range on y-axis.
         :param interval:    Get a new datapoint every .. milliseconds.
 
         '''
-        super().__init__(mpl.figure.Figure(constrained_layout=True))
+        super().__init__(mpl.figure.Figure())
         
         # chose the data
         self.index = index
         # Range settings
         self._x_len_ = x_len
-        self._y_range_ = y_range
+        
+        self.data_list = data_list
+        
 
         # Store two lists _x_ and _y_
         self._x_ = list(range(0, x_len))
-        self._y_ = [0] * x_len
+        self._y_ = data_list
 
         # Store a figure ax
         #plt.subplots(constrained_layout=True)
         self._ax_ = self.figure.subplots()
-        self._ax_.set_ylim(ymin=self._y_range_[0], ymax=self._y_range_[1]) # added
+        #self._ax_.set_ylim(ymin=self._y_range_[0], ymax=self._y_range_[1]) # added
         #----
-        self._ax_.set_title(str(data_func_list[index][1]))
-        #----
+        self._ax_.set_title(str(data_func_list[self.index][1]))
         
-        self._line_, = self._ax_.plot(self._x_, self._y_)                  # added
+        #----
+        lenY = len(self._y_)
+        self._y_ = self._y_[lenY-100:lenY] 
+        
+        self._ax_.set_ylim(ymin=min(self._y_)-min(self._y_)*10//100, ymax=max(self._y_)+max(self._y_)*10//100)
+        self._line_ , = self._ax_.plot(self._x_, self._y_)    # added
+        #self._ax_.autoscale()
         self.draw()                                                        # added
 
         # Initiate the timer
@@ -260,7 +267,9 @@ class MyFigureCanvas(FigureCanvas):
 
         '''
         self._y_.append(round(data_func_list[self.index][0](), 2))     # Add new datapoint
-        self._y_ = self._y_[-self._x_len_:]                 # Truncate list y
+        lenY = len(self._y_)
+        self._y_ = self._y_[lenY-100:lenY]                 # Truncate list y
+        self._ax_.set_ylim(ymin=min(self._y_)-min(self._y_)*10//100, ymax=max(self._y_)+max(self._y_)*10//100)
 
         # Previous code
         # --------------
@@ -272,55 +281,62 @@ class MyFigureCanvas(FigureCanvas):
         # New code
         # ---------
         self._line_.set_ydata(self._y_)
+        
         self._ax_.draw_artist(self._ax_.patch)
         self._ax_.draw_artist(self._line_)
+        
         self.update()
         self.flush_events()
         return
 
 # Data source
 # ------------
-
+data_list = {"temperature":[0]*100,"pressure":[0]*100,"altitude":[0]*100,"otherdata":[0]*100}
 def temperature():
+    """
     f = open("data.txt")
     x = f.readlines()[-1]
     data_listesi = x.split(",")
     k = int(data_listesi[0])
+    """
+    k = random.randint(20, 30)
+    data_list["temperature"].append(k)
     return k
 
 def pressure():
+    """
     f = open("data.txt")
     x = f.readlines()[-1]
     data_listesi = x.split(",")
     k = int(data_listesi[1])
+    """
+    k = random.randint(100, 200)
+    data_list["pressure"].append(k)
     return k
 
 def altitude():
+    """
     f = open("data.txt")
     x = f.readlines()[-1]
     data_listesi = x.split(",")
     k = int(data_listesi[2])
+    """
+    k = random.randint(700, 800)
+    data_list["altitude"].append(k)
     return k
 
 def otherdata():
+    """
     f = open("data.txt")
     x = f.readlines()[-1]
     data_listesi = x.split(",")
     k = int(data_listesi[3])
+    """
+    k = random.randint(90,100)
+    data_list["otherdata"].append(k)
     return k
 data_func_list = [(temperature,"temperature"),(pressure,"pressure"),(altitude,"altitude"),(otherdata,"otherdata")]
-"""    
-n = np.linspace(0, 499, 500)
-d = 50 + 25 * (np.sin(n / 8.3)) + 10 * (np.sin(n / 7.5)) - 5 * (np.sin(n / 1.5))
-i = 0
-def get_next_datapoint():
-    global i
-    i += 1
-    if i > 499:
-        i = 0
-    
-    return d[i]
-"""
+
 
 if __name__ == "__main__":
     import sys
