@@ -25,6 +25,7 @@ import random
 #import xlsxwriter
 import rospy
 from std_msgs.msg import Int32
+#--------------------------------------------------------
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -155,7 +156,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
+    #-------------------------------------------------------------------------------------------------------
     def selectionChange(self,index):
         
         if index ==0:
@@ -194,10 +195,13 @@ class Ui_MainWindow(object):
             self.ClearLayout(self.lyt)
             self.myFig4 = MyFigureCanvas(100,data_list["carbon"], interval=1,index = 3)
             self.lyt.addWidget(self.myFig4)
+    #--------------------------------------------------------------------------------------------------------
         
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
+        #--------------------------------------------------------------------------
         MainWindow.setWindowTitle(_translate("MainWindow", "OZU Rover SSC"))
+        #----------------------------------------------------------------------------
         self.label_2.setText(_translate("MainWindow", "Shovel Control"))
         self.pushButton_6.setText(_translate("MainWindow", "Shovel Take"))
         self.pushButton_5.setText(_translate("MainWindow", "Shovel Up"))
@@ -225,7 +229,7 @@ class Ui_MainWindow(object):
         self.pushButton.clicked.connect(self.Tube_1)
         self.pushButton_2.clicked.connect(self.Tube_2)
         #------------------------------------------------------------
-
+    #-----------------------------------------------------------
     def shovel_take(self):
         self.message = 1600
         self.pub.publish(self.message)
@@ -262,8 +266,8 @@ class Ui_MainWindow(object):
     def ClearLayout(self,layout):
         for i in reversed(range(layout.count())): 
             layout.itemAt(i).widget().setParent(None)
-
-
+    #----------------------------------------------------------------------------------------------------------------
+# directly copy
 class MyFigureCanvas(FigureCanvas):
     '''
     This is the FigureCanvas in which the live plot is drawn.
