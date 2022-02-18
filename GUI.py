@@ -245,7 +245,11 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Tube Control"))
         #-----------------------------------------------------------
         rospy.init_node("GUIcontroller")
-        self.pub = rospy.Publisher('motor',Float32,queue_size= 10)
+        self.Tubes = rospy.Publisher('tubes',Float32,queue_size= 10)
+        self.ShovelUp = rospy.Publisher('shovelUp',Float32,queue_size= 10)
+        self.ShovelDown = rospy.Publisher('shovelDown',Float32,queue_size= 10)
+        self.Shovel= rospy.Publisher('shovel',Float32,queue_size= 10)
+
         self.message = 0
         #-----------------------------------------------------------
 
@@ -261,35 +265,37 @@ class Ui_MainWindow(object):
 
     def shovel_take(self):
         self.message = 0
-        self.pub.publish(self.message)
-
-    def shovel_up(self):
-        self.message = 0
-        self.pub.publish(self.message)
-
-    def shovel_down(self):
-        self.message = 1
-        self.pub.publish(self.message)
+        self.Shovel.publish(self.message)
 
     def shovel_put(self):
         self.message = 1
-        self.pub.publish(self.message)
+        self.Shovel.publish(self.message)
 
+
+    def shovel_up(self):
+        self.message = 200*(150/8)
+        self.ShovelUp.publish(self.message)
+
+    def shovel_down(self):
+        self.message =  200*(150/8)
+        self.ShovelDown.publish(self.message)
+
+    
     def Tube_1(self):
-        self.message = 560
-        self.pub.publish(self.message)
+        self.message = 560/4
+        self.Tubes.publish(self.message)
 
     def Tube_2(self):
         self.message = 560/2
-        self.pub.publish(self.message)
+        self.Tubes.publish(self.message)
 
     def Tube_3(self):
-        self.message = 560/4
-        self.pub.publish(self.message)
+        self.message = (560/4)*3
+        self.Tubes.publish(self.message)
 
     def Tube_4(self):
-        self.message = 560/8
-        self.pub.publish(self.message)
+        self.message = 560
+        self.Tubes.publish(self.message)
 
 
     def ClearLayout(self,layout):
