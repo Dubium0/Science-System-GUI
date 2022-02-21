@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'denem1.ui'
@@ -10,11 +11,36 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from typing import *
+import sys
+import os
+from matplotlib.backends.qt_compat import QtCore, QtWidgets
+# from PyQt5 import QtWidgets, QtCore
+from matplotlib.backends.backend_qt5agg import FigureCanvas
+# from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import random
+#import xlsxwriter
+import rospy
+from std_msgs.msg import Int32,Float32
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 601)
+        #---
+        
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("logo.png"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        MainWindow.setWindowIcon(icon)
+        
+        #---
+        self.currentPosition = 0
+        self.destination = 0
+        self.shovelPos = "U"
+        
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.centralwidget)
@@ -113,11 +139,81 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+        
+        """
+        ----------------
+        """
+        
+        
+        """
+        ----------------
+        """
+        self.lyt = QtWidgets.QGridLayout()
+        self.frame.setLayout(self.lyt)
+        
+        self.myFig1 = MyFigureCanvas(100,data_list["temperature"] , interval=10,index = 0)
+        self.lyt.addWidget(self.myFig1,1,1)
+        
+        self.myFig2 = MyFigureCanvas(100,data_list["pressure"] , interval=10, index = 1)
+        self.lyt.addWidget(self.myFig2,1,2)
+        
+        
+        
+        self.myFig3 = MyFigureCanvas(100,data_list["altitude"] , interval=10,index = 2)
+        self.lyt.addWidget(self.myFig3,2,1)
+        
+        self.myFig4 = MyFigureCanvas(100,data_list["carbon"], interval=10,index = 3)
+        self.lyt.addWidget(self.myFig4,2,2)
+        
+        
+        
+        """
+        ----------------
+        """
+        
+        
+        
+        
+        
         self.gridLayout_4.addWidget(self.frame, 1, 0, 1, 1)
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.tabWidget.addTab(self.tab_2, "")
+        
+         #-----------------------------------------------------
+
+        self.frame2 = QtWidgets.QFrame(self.tab_2)
+        self.frame2.setMinimumSize(QtCore.QSize(594, 471))
+        self.frame2.setMaximumSize(QtCore.QSize(1600, 900))
+        self.frame2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame2.setObjectName("frame2")
+        #-----------
+        
+        """
+        ----------------
+        """
+        self.lyt2 = QtWidgets.QGridLayout()
+        self.frame2.setLayout(self.lyt2)
+        
+        self.myFig01 = MyFigureCanvas(100,data_list["temperature"] , interval=10,index = 0)
+        self.lyt.addWidget(self.myFig1,1,1)
+        
+        self.myFig02 = MyFigureCanvas(100,data_list["pressure"] , interval=10, index = 1)
+        self.lyt.addWidget(self.myFig2,1,2)
+        
+        self.myFig03 = MyFigureCanvas(100,data_list["altitude"] , interval=10,index = 2)
+        self.lyt.addWidget(self.myFig3,2,1)
+        
+        self.myFig04 = MyFigureCanvas(100,data_list["carbon"], interval=10,index = 3)
+        self.lyt.addWidget(self.myFig4,2,2)
+        
+        
+        
+        """
+        ----------------
+        """
         self.gridLayout_3.addWidget(self.tabWidget, 0, 0, 6, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -131,7 +227,46 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+    def selectionChange(self,index):
+        
+        if index ==0:
+            self.ClearLayout(self.lyt)
+            self.myFig1 = MyFigureCanvas(100,data_list["temperature"] , interval=10,index = 0)
+            self.lyt.addWidget(self.myFig1,1,1)
+            
+            self.myFig2 = MyFigureCanvas(100,data_list["pressure"] , interval=10, index = 1)
+            self.lyt.addWidget(self.myFig2,1,2)
+            
+            
+            
+            self.myFig3 = MyFigureCanvas(100,data_list["altitude"] , interval=10,index = 2)
+            self.lyt.addWidget(self.myFig3,2,1)
+            
+            self.myFig4 = MyFigureCanvas(100,data_list["carbon"], interval=10,index = 3)
+            self.lyt.addWidget(self.myFig4,2,2)
+        
+            
+        elif index ==1:
+            self.ClearLayout(self.lyt)
+            self.myFig2 = MyFigureCanvas(100,data_list["temperature"] , interval=10,index = 0)
+            self.lyt.addWidget(self.myFig2)
+            
+            
+        elif index ==2:
+            self.ClearLayout(self.lyt)
+            self.myFig3 = MyFigureCanvas(100,data_list["pressure"] , interval=10, index = 1)
+            self.lyt.addWidget(self.myFig3)
+            
+        elif index ==3:
+            self.ClearLayout(self.lyt)
+            self.myFig4 = MyFigureCanvas(100,data_list["altitude"] , interval=10,index = 2)
+            self.lyt.addWidget(self.myFig4)
+        elif index ==4:
+            self.ClearLayout(self.lyt)
+            self.myFig4 = MyFigureCanvas(100,data_list["carbon"], interval=10,index = 3)
+            self.lyt.addWidget(self.myFig4)
+            
+            
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "OZU Rover SSC"))
@@ -152,12 +287,216 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "Current Pos"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Tab 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Tab 2"))
+        
+        #-----------------------------------------------------------
+        rospy.init_node("GUIcontroller")
+        self.Tubes = rospy.Publisher('tubes',Float32,queue_size= 10)
+        self.ShovelUp = rospy.Publisher('shovelUp',Float32,queue_size= 10)
+        self.ShovelDown = rospy.Publisher('shovelDown',Float32,queue_size= 10)
+        self.Shovel= rospy.Publisher('shovel',Float32,queue_size= 10)
+        self.WaterPump = rospy.Publisher('waterPumps',Float32,queue_size= 10)
+        self.message = 0
+        #-----------------------------------------------------------
+
+        self.pushButton_6.clicked.connect(self.shovel_take)
+        self.pushButton_5.clicked.connect(self.shovel_up)
+        self.pushButton_7.clicked.connect(self.shovel_down)
+        self.pushButton_8.clicked.connect(self.shovel_put)
+        self.pushButton_3.clicked.connect(self.Tube_3)
+        self.pushButton_4.clicked.connect(self.Tube_4)
+        self.pushButton.clicked.connect(self.Tube_1)
+        self.pushButton_2.clicked.connect(self.Tube_2)
+        self.pushButton_9.clicked.connect(self.waterPump_pump)
+        self.pushButton_10.clicked.connect(self.waterPump_stop)
+        #------------------------------------------------------------
+        self.lineEdit.text(str(self.currentPosition))
+
+
+    def shovel_take(self):
+        self.message = 0
+        self.Shovel.publish(self.message)
+
+    def shovel_put(self):
+        self.message = 1
+        self.Shovel.publish(self.message)
+
+
+    def shovel_up(self):
+        if self.shovelPos == "D":
+            self.message = 200*(360/8)
+            self.shovelPos = "U"
+            self.ShovelUp.publish(self.message)
+
+    def shovel_down(self):
+        if self.currentPosition != 0:
+            self.Tube_4()
+        
+
+        if self.shovelPos == "U":
+            self.message =  200*(360/8)
+            self.shovelPos = "D"
+            self.ShovelDown.publish(self.message)
+
+    
+    def Tube_1(self):
+        if self.shovelPos == "U": 
+            self.destination = 1
+            self.message = abs((self.currentPosition - self.destination)) * 574/4  
+            self.currentPosition = 1
+            self.Tubes.publish(self.message)
+
+
+    def Tube_2(self):
+        if self.shovelPos == "U": 
+            self.destination = 2
+            self.message = abs((self.currentPosition - self.destination)) * 574/4  
+            self.currentPosition = 2
+            self.Tubes.publish(self.message)
+
+    def Tube_3(self):
+        if self.shovelPos == "U": 
+            self.destination = 3
+            self.message = abs((self.currentPosition - self.destination)) * 574/4  
+            self.currentPosition = 3
+            self.Tubes.publish(self.message)
+
+    def Tube_4(self):
+        if self.shovelPos == "U": 
+            self.destination = 4
+            self.message = abs((self.currentPosition - self.destination)) * 574/4  
+            self.currentPosition = 0
+            self.Tubes.publish(self.message)
+
+    def waterPump_pump(self):
+        self.message = 1
+        self.WaterPump.publish(self.message)
+        
+
+    def waterPump_stop(self):
+        self.message = 0
+        self.WaterPump.publish(self.message)
+
+
+    def ClearLayout(self,layout):
+        for i in reversed(range(layout.count())): 
+            layout.itemAt(i).widget().setParent(None)
+
+
+class MyFigureCanvas(FigureCanvas):
+    '''
+    This is the FigureCanvas in which the live plot is drawn.
+    '''
+    def __init__(self, x_len, data_list ,interval , index):
+        '''
+        :param x_len:       The nr of data points shown in one plot.
+        :param y_range:     Range on y-axis.
+        :param interval:    Get a new datapoint every .. milliseconds.
+        '''
+        super().__init__(mpl.figure.Figure())
+        
+        # chose the data
+        self.index = index
+        # Range settings
+        self._x_len_ = x_len
+        
+        self.data_list = data_list
+        
+
+        # Store two lists _x_ and _y_
+        self._x_ = list(range(0, x_len))
+        self._y_ = data_list
+
+        # Store a figure ax
+        #plt.subplots(constrained_layout=True)
+        self._ax_ = self.figure.subplots()
+        #self._ax_.set_ylim(ymin=self._y_range_[0], ymax=self._y_range_[1]) # added
+        #----
+        self._ax_.set_title(str(data_func_list[self.index][1]))
+        
+        #----
+        lenY = len(self._y_)
+        self._y_ = self._y_[lenY-100:lenY] 
+        
+        self._ax_.set_ylim(ymin=min(self._y_)-min(self._y_)*10//100, ymax=max(self._y_)+max(self._y_)*10//100)
+        self._line_ , = self._ax_.plot(self._x_, self._y_)    # added
+        #self._ax_.autoscale()
+        self.draw()                                                        # added
+
+        # Initiate the timer
+        self._timer_ = self.new_timer(interval, [(self._update_canvas_, (), {})])
+        self._timer_.start()
+        return
+
+    def _update_canvas_(self) -> None:
+        '''
+        This function gets called regularly by the timer.
+        '''
+        self._y_.append(round(data_func_list[self.index][0](), 2))     # Add new datapoint
+        lenY = len(self._y_)
+        self._y_ = self._y_[lenY-100:lenY]                 # Truncate list y
+        self._ax_.set_ylim(ymin=min(self._y_)-min(self._y_)*10//100, ymax=max(self._y_)+max(self._y_)*10//100)
+
+        # Previous code
+        # --------------
+        # self._ax_.clear()                                   # Clear ax
+        # self._ax_.plot(self._x_, self._y_)                  # Plot y(x)
+        # self._ax_.set_ylim(ymin=self._y_range_[0], ymax=self._y_range_[1])
+        # self.draw()
+
+        # New code
+        # ---------
+        self._line_.set_ydata(self._y_)
+        
+        self._ax_.draw_artist(self._ax_.patch)
+        self._ax_.draw_artist(self._line_)
+        
+        self.update()
+        self.flush_events()
+        return
+
+# Data source
+# ------------
+data_list = {"temperature":[0]*100,"pressure":[0]*100,"altitude":[0]*100,"carbon":[0]*100}
+def temperature():
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = float(data_listesi[0])
+    data_list["temperature"].append(k)
+    return k
+
+def pressure():
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = float(data_listesi[1])
+    data_list["pressure"].append(k)
+    return k
+
+def altitude():
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = float(data_listesi[2])
+    data_list["altitude"].append(k)
+    return k
+
+def karbon():
+    f = open("data.txt")
+    x = f.readlines()[-1]
+    data_listesi = x.split(",")
+    k = float(data_listesi[3])
+    data_list["carbon"].append(k)
+    return k
+data_func_list = [(temperature,"temperature"),(pressure,"pressure"),(altitude,"altitude"),(karbon,"carbon")]
+
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
