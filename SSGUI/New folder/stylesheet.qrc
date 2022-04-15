@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>../../GUI resources/Combinear.qss</file>
+    <file>../../GUI resources/Vector_2677.jpg</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>../logo.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>961</width>
+    <height>741</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="upperSideHorizontalLayout" stretch="2,30,2,2,2">
+      <item>
+       <widget class="QLabel" name="upperSideLabel">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="minimizeButton">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="fullSizeButton">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitButton">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="graphTab">
+       <attribute name="title">
+        <string>Sensor Graphs</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="graphTabVerticalLayout" stretch="1,223,0">
+        <item>
+         <layout class="QHBoxLayout" name="buttonsHorizontalLayout">
+          <item>
+           <widget class="QComboBox" name="graphComboBox"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="startStreamButton">
+            <property name="text">
+             <string>Start Stream</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="createExcelPushButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Create Excel File</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="graphGridLayout"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="bottomSideHorizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="appNameLabel">
+            <property name="text">
+             <string>Science System APP v2.0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="createdByLabel">
+            <property name="font">
+             <font>
+              <family>Nirmala UI</family>
+              <pointsize>7</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>created by Yunus Emre ASLAN</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignRight|Qt::AlignBottom">
+           <widget class="QFrame" name="size_grip">
+            <property name="minimumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(90, 90, 90);</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="controllerTab">
+       <attribute name="title">
+        <string>Controller</string>
+       </attribute>
+       <layout class="QGridLayout" name="controllerTabGridLayout" columnstretch="10,0,0,0,0" rowminimumheight="1,1,0" columnminimumwidth="100,1,1,0,0">
+        <item row="0" column="4">
+         <layout class="QGridLayout" name="shovelContainerLayout" rowminimumheight="1,60,1,60,60">
+          <item row="3" column="0">
+           <widget class="QLabel" name="setShovelContainerPositionLabel">
+            <property name="text">
+             <string>Set Shovel Container Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="currentShovelContainerPositionLabel">
+            <property name="text">
+             <string>Current Shovel Container Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="setShovelContainerPositionLineEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="shovelUpButton">
+            <property name="text">
+             <string>Shovel Up</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="setShovelContainerPositionButton">
+            <property name="text">
+             <string>Set Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="3">
+           <widget class="QLabel" name="ShovelContainerAdvanceControlsLabel">
+            <property name="text">
+             <string>Advance Controls</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="shovelContainerLabel">
+            <property name="text">
+             <string>Shovel Container</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QPushButton" name="shovelDownButton">
+            <property name="text">
+             <string>Shovel Down</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QLineEdit" name="currentShovelContainerPositionLineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="2">
+         <layout class="QGridLayout" name="tubeControllerGridLayout" rowminimumheight="1,40,40,40,40,40,40">
+          <item row="2" column="1" colspan="2">
+           <widget class="QPushButton" name="tube4Button">
+            <property name="text">
+             <string>Tube 4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="currentTubePositionLabel">
+            <property name="text">
+             <string>Current Tube Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="3">
+           <widget class="QPushButton" name="takeCurrentPosition2TestPositionButton">
+            <property name="text">
+             <string>Take Current Tube Position To Test Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="tubeControllerLabel">
+            <property name="text">
+             <string>Tube Controller</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QLineEdit" name="currentTubePositionLineEdit"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="setTubePositionLabel">
+            <property name="text">
+             <string>Set Tube Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QPushButton" name="setTubePositionButton">
+            <property name="text">
+             <string>Set Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2">
+           <widget class="QPushButton" name="takeSelectedTube2TestPositionButton">
+            <property name="text">
+             <string>To Test Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="tube3Button">
+            <property name="text">
+             <string>Tube 3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QPushButton" name="tube2Button">
+            <property name="text">
+             <string>Tube 2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="takeTubeLineEdit"/>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="setTubePositionLineEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="tube1Button">
+            <property name="text">
+             <string>Tube 1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="takeTubeLabel">
+            <property name="text">
+             <string>Take Tube</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="3" rowspan="2">
+         <spacer name="horizontalSpacerBetweenPumpAndShovel">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="2">
+         <layout class="QGridLayout" name="pumpControllerGridLayout" rowminimumheight="1,90,90,90" columnminimumwidth="1,1,1,1,1,1">
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pump1StartButton">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pump3StartButton">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="6">
+           <widget class="QLabel" name="pumpControllerLabel">
+            <property name="text">
+             <string>Pump Controller</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QPushButton" name="pump2StopButton">
+            <property name="text">
+             <string>Stop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="pump2StartButton">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="pump4Label">
+            <property name="text">
+             <string>Pump 3</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pump1StopButton">
+            <property name="text">
+             <string>Stop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="pump1Label">
+            <property name="text">
+             <string>Pump 1</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="pump3StopButton">
+            <property name="text">
+             <string>Stop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3" colspan="3">
+           <widget class="QPushButton" name="stopAllButton">
+            <property name="text">
+             <string>Stop All</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="pump3Label">
+            <property name="text">
+             <string>Pump 3</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <widget class="QPushButton" name="pumpAllButton">
+            <property name="text">
+             <string>Pump all</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QPushButton" name="pump4StopButton">
+            <property name="text">
+             <string>Stop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="pump2Label">
+            <property name="text">
+             <string>Pump 2</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QPushButton" name="pump4StartButton">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="controllerLeftSideGridLayout">
+          <item row="2" column="0">
+           <widget class="QPushButton" name="putSoilButton">
+            <property name="text">
+             <string>PUT SOIL</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="onlySoilTakingButton">
+            <property name="text">
+             <string>TAKE SOIL</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="startAutoScienceButton">
+            <property name="text">
+             <string>AUTO START</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="4">
+         <layout class="QGridLayout" name="shovelAndSoilTakerGridLayout" rowminimumheight="1,40,40,40,1,40,40,40">
+          <item row="7" column="0">
+           <widget class="QLabel" name="setSoilTakerPositionLabel">
+            <property name="text">
+             <string>Set Soil Taker Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="currentSoilTakerPositionLabel">
+            <property name="text">
+             <string>Current Soil Taker Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="setSoilTakerPositionLineEdit"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="currentShovelPositionLabel">
+            <property name="text">
+             <string>Current Shovel Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="setShovelPoisitionLabel">
+            <property name="text">
+             <string>Set Shovel Position</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="setShovelPositionLineEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="shovelTakeButton">
+            <property name="text">
+             <string>Shovel Take</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QPushButton" name="soilTakerOpenButton">
+            <property name="text">
+             <string>Soil Taker Open</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QPushButton" name="setSoilTakerPositionButton">
+            <property name="text">
+             <string>Set Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QPushButton" name="setShovelPositionButton">
+            <property name="text">
+             <string>Set Position</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="shovelAndSoilTakerLabel">
+            <property name="text">
+             <string>Shovel &amp; Soil Taker</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QPushButton" name="shovelPutButton">
+            <property name="text">
+             <string>Shovel Put</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLineEdit" name="currentShovelPositionLineEdit"/>
+          </item>
+          <item row="4" column="0" colspan="3">
+           <widget class="QLabel" name="shovelAndSoilTakerAdvanceControlsLabel">
+            <property name="text">
+             <string>Advance Controls</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" colspan="2">
+           <widget class="QPushButton" name="soilTakerCloseButton">
+            <property name="text">
+             <string>Soil Taker Close</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1" colspan="2">
+           <widget class="QLineEdit" name="currentSoilTakerPositionLineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="1" rowspan="2">
+         <spacer name="horizontalSpacerBetweenAutoAndPump">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="2" colspan="3">
+         <layout class="QHBoxLayout" name="statusBarHorizontalLayout">
+          <item>
+           <widget class="QLabel" name="statusLabel">
+            <property name="text">
+             <string>  Status  </string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="statusLineEdit"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="microscopeTab">
+       <attribute name="title">
+        <string>Microscope</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="microscopeTabHorizontalLayout" stretch="10,1">
+        <item>
+         <widget class="QLabel" name="microscopeImageFeedLabel">
+          <property name="text">
+           <string>camera image</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="microscopeButtonsVerticalLayout">
+          <item>
+           <widget class="QSlider" name="microscopeFocusHorizontalSlider">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="takeCurrentImageButton">
+            <property name="text">
+             <string>Take Current Image</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="spectrometerTab">
+       <attribute name="title">
+        <string>Spectrometer</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <action name="actionChangeTheme">
+   <property name="text">
+    <string>Tema Değiştir</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="New folder/stylesheet.qrc"/>
+ </resources>
+ <connections/>
+</ui>

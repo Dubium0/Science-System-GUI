@@ -1,0 +1,25 @@
+int currentPos = 0;
+
+void FocusMicroscope(int msg)
+{
+	if ( msg >0=
+	{
+	for (pos = currentPos; pos <= currentPos +msg; pos += 1)
+	 {
+    		myservo.write(pos);              
+       	 	delay(15);                    
+  	 }
+	currentPos+= msg;
+	}
+	else
+	{
+	for (pos = currentPos; pos >= currentPos+msg; pos -= 1)
+	 {
+    		myservo.write(pos);              
+       	 	delay(15);                    
+  	 }
+	currentPos+= msg;	
+	
+	
+	}
+}
