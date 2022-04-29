@@ -142,7 +142,7 @@
        <attribute name="title">
         <string>Controller</string>
        </attribute>
-       <layout class="QGridLayout" name="controllerTabGridLayout" columnstretch="10,0,0,0,0">
+       <layout class="QGridLayout" name="controllerTabGridLayout" columnstretch="10,0,0,0,0" columnminimumwidth="1,1,50,1,50">
         <item row="2" column="2" colspan="3">
          <layout class="QHBoxLayout" name="statusBarHorizontalLayout" stretch="1,10">
           <item>
@@ -185,34 +185,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="controllerLeftSideGridLayout">
-          <property name="sizeConstraint">
-           <enum>QLayout::SetDefaultConstraint</enum>
-          </property>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="putSoilButton">
-            <property name="text">
-             <string>PUT SOIL</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="onlySoilTakingButton">
-            <property name="text">
-             <string>TAKE SOIL</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="startAutoScienceButton">
-            <property name="text">
-             <string>AUTO START</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
         <item row="0" column="4">
          <layout class="QGridLayout" name="shovelContainerLayout" rowminimumheight="1,60,1,60,60" columnminimumwidth="200,1,1">
@@ -665,6 +637,44 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0" rowspan="3">
+         <layout class="QGridLayout" name="controllerLeftSideGridLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="onlySoilTakingButton">
+            <property name="text">
+             <string>TAKE SOIL</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="putSoilButton">
+            <property name="text">
+             <string>PUT SOIL</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="startAutoScienceButton">
+            <property name="text">
+             <string>AUTO START</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="emergencyButton">
+            <property name="text">
+             <string>Emergency Button</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
             </property>
            </widget>
           </item>

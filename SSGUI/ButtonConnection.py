@@ -332,7 +332,8 @@ class Button_Functions():
         
     
 
-
+    def getStatus(self):
+        return self.
 
 
 
